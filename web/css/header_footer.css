@@ -1,10 +1,158 @@
+#top-header{
+    background-color: #DEBD6F;
+    height: 35px;
+    padding-top: 3px;
+}
+
+#top-left-header{
+
+}
+
+#mid-header{
+    padding: 20px;
+    height: 126px;
+    margin-bottom: 20px;
+}
+.logo-container{
+    margin-top: 14px;
+    margin-bottom: 14px;
+    height: 98px;
+    width: 468px;
+}
+
+#under-header{
+    border-bottom-width: 5px;
+    border-bottom-color: black;
+    border-bottom-style: solid;
+}
+
+body{
+    margin: 0px;
+}
+
+
+
+
+.button {
+    position: absolute;
+    top: 138px;
+    right: 5px;
+    display: inline-block;
+
+    -webkit-border-radius: 10px;
+
+    -webkit-box-shadow:
+            0px 3px rgba(128,128,128,1), /* gradient effects */
+            0px 4px rgba(118,118,118,1),
+            0px 5px rgba(108,108,108,1),
+            0px 6px rgba(98,98,98,1),
+            0px 7px rgba(88,88,88,1),
+            0px 8px rgba(78,78,78,1),
+            0px 14px 6px -1px rgba(128,128,128,1); /* shadow */
+
+    -webkit-transition: -webkit-box-shadow .1s ease-in-out;
+}
+
+.button span {
+    background-color: #E8E8E8;
+
+    background-image:
+        /* gloss gradient */
+            -webkit-gradient(
+                    linear,
+                    left bottom,
+                    left top,
+                    color-stop(50%,rgba(255,255,255,0)),
+                    color-stop(50%,rgba(255,255,255,0.3)),
+                    color-stop(100%,rgba(255,255,255,0.2))),
+
+                /* dark outside gradient */
+            -webkit-gradient(
+                    linear,
+                    left top,
+                    right top,
+                    color-stop(0%,rgba(210,210,210,0.3)),
+                    color-stop(20%,rgba(210,210,210,0)),
+                    color-stop(80%,rgba(210,210,210,0)),
+                    color-stop(100%,rgba(210,210,210,0.3))),
+
+                /* light inner gradient */
+            -webkit-gradient(
+                    linear,
+                    left top,
+                    right top,
+                    color-stop(0%,rgba(255,255,255,0)),
+                    color-stop(20%,rgba(255,255,255,0.5)),
+                    color-stop(80%,rgba(255,255,255,0.5)),
+                    color-stop(100%,rgba(255,255,255,0))),
+
+                /* diagonal line pattern */
+            -webkit-gradient(
+                    linear,
+                    0% 100%,
+                    100% 0%,
+                    color-stop(0%,rgba(255,255,255,0)),
+                    color-stop(40%,rgba(255,255,255,0)),
+                    color-stop(40%,#D2D2D1),
+                    color-stop(60%,#D2D2D1),
+                    color-stop(60%,rgba(255,255,255,0)),
+                    color-stop(100%,rgba(255,255,255,0)));
+
+    -webkit-box-shadow:
+            0px -1px #fff, /* top highlight */
+            0px 1px 1px #FFFFFF; /* bottom edge */
+
+    -webkit-background-size: 100%, 100%, 100%, 4px 4px;
+
+    -webkit-border-radius: 10px;
+    -webkit-transition: -webkit-transform .1s ease-in-out;
+
+    display: inline-block;
+    padding: 4px 7px 4px 7px;
+
+    color: #3A474D;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 15px;
+
+    text-shadow: 0px 1px #fff, 0px -1px #262F33;
+}
+
+.button span:hover {
+    color: #449D44;
+    text-shadow: 0px -1px #97A63A;
+    cursor: pointer;
+}
+
+.button:active {
+    -webkit-box-shadow:
+            0px 3px rgba(128,128,128,1),
+            0px 4px rgba(118,118,118,1),
+            0px 5px rgba(108,108,108,1),
+            0px 6px rgba(98,98,98,1),
+            0px 7px rgba(88,88,88,1),
+            0px 8px rgba(78,78,78,1),
+            0px 10px 2px 0px rgba(128,128,128,.6); /* shadow */
+}
+
+.button:active span{
+    -webkit-transform: translate(0, 5px); /* depth of button press */
+}
+
+
+#deconnexionBtn span:hover{
+    color: #C9302C;
+}
+
 #total-footer {
     margin-top: 40px;
 }
+
 .haut-footer {
     background: transparent url('http://ept.sn/wp-content/plugins/floating-social-media-icon/images/themes/30/B.png') repeat-X;
     padding: 5px 0;
 }
+
 .bas-footer {
     background: #000000 none repeat scroll 0 0;
     padding: 5px 0;
