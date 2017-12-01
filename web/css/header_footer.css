@@ -1,0 +1,12 @@
+#total-footer {
+    margin-top: 40px;
+}
+.haut-footer {
+    background: transparent url('http://ept.sn/wp-content/plugins/floating-social-media-icon/images/themes/30/B.png') repeat-X;
+    padding: 5px 0;
+}
+.bas-footer {
+    background: #000000 none repeat scroll 0 0;
+    padding: 5px 0;
+    color: #FFFFFF;
+}

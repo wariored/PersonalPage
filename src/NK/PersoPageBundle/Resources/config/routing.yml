@@ -1,0 +1,3 @@
+nk_perso_page_homepage:
+    path:     /
+    defaults: { _controller: NKPersoPageBundle:Default:index }

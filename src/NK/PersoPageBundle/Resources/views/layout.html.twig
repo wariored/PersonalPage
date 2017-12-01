@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+	<div class="container">
+		<nav>
+			{% include 'NKPersoPageBundle::Menu/menu.html.twig' %}
+		</nav>
+		{% block NKPersoPageBundle_content %}
+		{% endblock NKPersoPageBundle_content %}
+	</div>
+{% endblock body %}

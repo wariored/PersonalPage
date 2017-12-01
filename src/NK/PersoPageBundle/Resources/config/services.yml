@@ -1,0 +1,4 @@
+services:
+#    nk_perso_page.example:
+#        class: NK\PersoPageBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

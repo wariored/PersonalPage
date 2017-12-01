@@ -2,12 +2,23 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/header_footer.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('css/menu.css') }}"/>
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="container-fluid">
+            <header class="row">
+                {% include 'default/header.html.twig' %}
+            </header>
+            {% block body %}{% endblock %}
+            <footer class="row">
+                {% include 'default/footer.html.twig' %}
+            </footer>
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
