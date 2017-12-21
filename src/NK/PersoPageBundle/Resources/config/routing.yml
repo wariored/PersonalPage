@@ -2,6 +2,18 @@ nk_perso_page_homepage:
     path:     /
     defaults: { _controller: NKPersoPageBundle:Default:index }
 
-nk_perso_page_welcomePage:
+nk_perso_page_accueil:
     path:    /Accueil
     defaults: { _controller: NKPersoPageBundle:Accueil:accueil }
+
+nk_perso_page_enseignements:
+    path:    /Enseignements
+    defaults: { _controller: NKPersoPageBundle:Enseignements_Activites_Administratives\Enseignements:enseignements }
+
+nk_perso_page_recherche:
+    path:    /Recherche
+    defaults: { _controller: NKPersoPageBundle:Recherche_Publications\Recherche:recherche }
+
+nk_perso_page_activites_administratives:
+    path:    /ActivitesAdministratives
+    defaults: { _controller: NKPersoPageBundle:Enseignements_Activites_Administratives\ActivitesAdministratives:activitesAdministratives }

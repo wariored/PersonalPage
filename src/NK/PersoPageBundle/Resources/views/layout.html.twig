@@ -1,11 +1,15 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-	<div class="container">
-		<nav>
+	<div class="row">
+		<nav class= "col-sm-offset-1 col-sm-2">
 			{% include 'NKPersoPageBundle::Menu/menu.html.twig' %}
 		</nav>
-		{% block NKPersoPageBundle_content %}
-		{% endblock NKPersoPageBundle_content %}
+		<div class="col-sm-8" id="cadre">
+			<div class="pageId"><span>fr:{% block titre%}{% endblock titre %}</span></div>
+            {% block NKPersoPageBundle_content %}
+            {% endblock NKPersoPageBundle_content %}
+		</div>
+
 	</div>
 {% endblock body %}
