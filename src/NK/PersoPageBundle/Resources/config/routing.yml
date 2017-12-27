@@ -3,17 +3,29 @@ nk_perso_page_homepage:
     defaults: { _controller: NKPersoPageBundle:Default:index }
 
 nk_perso_page_accueil:
-    path:    /Accueil
+    path:    /accueil
     defaults: { _controller: NKPersoPageBundle:Accueil:accueil }
 
 nk_perso_page_enseignements:
-    path:    /Enseignements
+    path:    /enseignements
     defaults: { _controller: NKPersoPageBundle:Enseignements_Activites_Administratives\Enseignements:enseignements }
 
 nk_perso_page_recherche:
-    path:    /Recherche
+    path:    /recherche
     defaults: { _controller: NKPersoPageBundle:Recherche_Publications\Recherche:recherche }
+
+nk_perso_page_publication:
+    path:    /publication
+    defaults: { _controller: NKPersoPageBundle:Recherche_Publications\Publication:publication }
 
 nk_perso_page_activites_administratives:
     path:    /ActivitesAdministratives
     defaults: { _controller: NKPersoPageBundle:Enseignements_Activites_Administratives\ActivitesAdministratives:activitesAdministratives }
+
+nk_perso_page_lien:
+    path:    /lien
+    defaults: { _controller: NKPersoPageBundle:Liens_Hobbies\Lien:lien }
+
+nk_perso_page_hobbie:
+    path:    /hobbie
+    defaults: { _controller: NKPersoPageBundle:Liens_Hobbies\Hobbie:hobbie }

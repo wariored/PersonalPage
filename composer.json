@@ -1,5 +1,6 @@
 {
-    "name": "mac/perso",
+    "name": "perso-page",
+    "author": "Papa Momar Nokho<papamomarnolho@gmail.com> and Cheikh Tidjane Konteye<cheikh1005@gmail.com>"
     "license": "proprietary",
     "type": "project",
     "autoload": {
