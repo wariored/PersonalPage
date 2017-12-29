@@ -1,21 +1,58 @@
 {% extends 'NKPersoPageBundle::layout.html.twig' %}
 {% block titre %}Publication{% endblock titre %}
 {% block NKPersoPageBundle_content %}
-    <form method="post" style="margin-top: 25px; margin-bottom: 15px;">
-    	<textarea name="content" id="editor"></textarea>
+	{% for noticeMessage in app.session.flashbag.get('notice') %}
+		<div class="alert alert-success" style="margin-top: 15px";>
+  			{{ noticeMessage }}
+		</div>
+	{% endfor %}
+    <form method="post" action="{{ url('nk_perso_page_publication') }}" style="margin-top: 25px; margin-bottom: 15px;">
+    	<textarea name="publication" id="editor">
+    		{% if app.user.professor.publishedData.Publication is defined %}
+    			{{ app.user.professor.publishedData.Publication }}
+    		{% endif %}
+    	</textarea>
+    	<input style="float:right; margin-top: 15px;" type="submit" name="submit" class="btn btn-success" value="Publier">
   	</form>
-  	<button id="result">Voir le rendu</button>
+  	<button class="btn btn-default" id="result">Voir le rendu</button>
+  	<button class="btn btn-default" id="save">Sauvegarder</button><h5 id="zone"></h5>
+  	<div style="float: right;">Recharger la <a id="get-saved" >sauvegarde</a></div>
   	<br><br>
   	<p id="text-edit"></p>
 {% endblock NKPersoPageBundle_content %}
 {% block javascripts %}
-
 	<script>
 	    CKEDITOR.replace( 'editor' );
 	    $("#result").on("click", function() {
 	    	$('#text-edit').empty();
+	    	$('#zone').empty();
    			$('#text-edit').prepend(CKEDITOR.instances.editor.getData());
-
+		});
+		$("#save").on("click", function() {
+			var datas = {request : CKEDITOR.instances.editor.getData()};
+	    	$.ajax({
+                type: "POST",
+                beforeSend: function() { $('#zone').html('En charge.....') },
+                url: "{{ url('nk_perso_page_publication') }}",
+                data: datas,
+                error: function(jqXHR, textStatus, errorThrown) { $('#zone').html('Une erreur est survenue') },
+                success: function(htmlResponse) { $('#zone').html('Données bien enrégistrées') }
+            });
+		});
+		$("#get-saved").on("click", function() {
+			$('#text-edit').empty();
+	    	$('#zone').empty();
+	    	$.ajax({
+	            type: 'post',
+	            url: "{{ url('nk_perso_page_ajax', {'field': 'publication'}) }}",
+	            dataType: 'json',
+	            beforeSend: function () {  $('#zone').html('En charge.....') },
+	            error: function(jqXHR, textStatus, errorThrown) { $('#zone').html('Une erreur est survenue') },
+	            success: function (json) {
+	            		$('#zone').html('Données chargées');
+	                    CKEDITOR.instances.editor.setData(json);
+	            }
+        	});
 		});
 	</script>
 {% endblock javascripts %}

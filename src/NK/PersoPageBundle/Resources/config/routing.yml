@@ -29,3 +29,7 @@ nk_perso_page_lien:
 nk_perso_page_hobbie:
     path:    /hobbie
     defaults: { _controller: NKPersoPageBundle:Liens_Hobbies\Hobbie:hobbie }
+
+nk_perso_page_ajax:
+    path:    /ajax/{field}
+    defaults: { _controller: NKPersoPageBundle:Ajax\Ajax:ajax }
