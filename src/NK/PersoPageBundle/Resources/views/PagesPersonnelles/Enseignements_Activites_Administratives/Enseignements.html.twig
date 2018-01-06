@@ -1,5 +1,74 @@
 {% extends 'NKPersoPageBundle::layout.html.twig' %}
 {% block titre %}Enseignements{% endblock titre %}
 {% block NKPersoPageBundle_content %}
-    Ici les enseignements
+	{% if is_granted('ROLE_PROFESSOR') %}
+		{% if professorFoundNotMe is not defined %}
+			{% for noticeMessage in app.session.flashbag.get('notice') %}
+				<div class="alert alert-success" style="margin-top: 15px";>
+		  			{{ noticeMessage }}
+				</div>
+			{% endfor %}
+		    <form method="post" action="{{ url('nk_perso_page_enseignements') }}" style="margin-top: 25px; margin-bottom: 15px;">
+		    	<textarea name="enseignement" id="editor">
+		    		{% if app.user.professor.publishedData.enseignement is defined %}
+		    			{{ app.user.professor.publishedData.enseignement }}
+		    		{% endif %}
+		    	</textarea>
+		    	<input style="float:right; margin-top: 15px;" type="submit" name="submit" class="btn btn-success" value="Publier">
+		  	</form>
+		  	<button class="btn btn-default" id="result">Voir le rendu</button>
+		  	<button class="btn btn-default" id="save">Sauvegarder</button><h5 id="zone"></h5>
+		  	<div style="float: right;">Recharger la <a id="get-saved" >sauvegarde</a></div>
+		  	<br><br>
+		  	<p id="text-edit"></p>
+		{% elseif professorFoundNotMe is not null %}
+			{% if professorFoundNotMe.professor.publishedData is not null %}
+				{{professorFoundNotMe.professor.publishedData.enseignement|raw}}
+			{% endif %}
+		{% endif %}
+  	{% else %}
+		{% if professorFound is defined and professorFound is not null %}
+			{% if professorFound.professor.publishedData is not null %}
+				{{professorFound.professor.publishedData.enseignement|raw}}
+			{% endif %}
+		{% endif %}
+	{% endif %}
 {% endblock NKPersoPageBundle_content %}
+{% block javascripts %}
+	<script>
+		{% if is_granted('ROLE_PROFESSOR') %}
+		    CKEDITOR.replace( 'editor' );
+		    $("#result").on("click", function() {
+		    	$('#text-edit').empty();
+		    	$('#zone').empty();
+	   			$('#text-edit').prepend(CKEDITOR.instances.editor.getData());
+			});
+			$("#save").on("click", function() {
+				var datas = {request : CKEDITOR.instances.editor.getData()};
+		    	$.ajax({
+	                type: "POST",
+	                beforeSend: function() { $('#zone').html('En charge.....') },
+	                url: "{{ url('nk_perso_page_enseignements') }}",
+	                data: datas,
+	                error: function(jqXHR, textStatus, errorThrown) { $('#zone').html('Une erreur est survenue') },
+	                success: function(htmlResponse) { $('#zone').html('Données bien enrégistrées') }
+	            });
+			});
+			$("#get-saved").on("click", function() {
+				$('#text-edit').empty();
+		    	$('#zone').empty();
+		    	$.ajax({
+		            type: 'post',
+		            url: "{{ url('nk_perso_page_ajax', {'field': 'enseignement'}) }}",
+		            dataType: 'json',
+		            beforeSend: function () {  $('#zone').html('En charge.....') },
+		            error: function(jqXHR, textStatus, errorThrown) { $('#zone').html('Une erreur est survenue') },
+		            success: function (json) {
+		            		$('#zone').html('Données chargées');
+		                    CKEDITOR.instances.editor.setData(json);
+		            }
+	        	});
+			});
+		{% endif %}
+	</script>
+{% endblock javascripts %}

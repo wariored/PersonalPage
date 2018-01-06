@@ -21,7 +21,21 @@ class AjaxController extends Controller
 	            	case 'publication':
 	            		return new JsonResponse($user->getProfessor()->getSavedData()->getPublication());
 	            		break;
-	            	
+	            	case 'enseignement':
+	            		return new JsonResponse($user->getProfessor()->getSavedData()->getEnseignement());
+	            		break;
+	            	case 'activAdmin':
+	            		return new JsonResponse($user->getProfessor()->getSavedData()->getActivAdmin());
+	            		break;
+	            	case 'lien':
+	            		return new JsonResponse($user->getProfessor()->getSavedData()->getLien());
+	            		break;
+	            	case 'recherche':
+	            		return new JsonResponse($user->getProfessor()->getSavedData()->getRecherche());
+	            		break;
+	            	case 'hobbie':
+	            		return new JsonResponse($user->getProfessor()->getSavedData()->getHobbie());
+	            		break;
 	            	default:
 	            		# code...
 	            		break;

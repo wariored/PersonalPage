@@ -3,32 +3,32 @@ nk_perso_page_homepage:
     defaults: { _controller: NKPersoPageBundle:Default:index }
 
 nk_perso_page_accueil:
-    path:    /accueil
-    defaults: { _controller: NKPersoPageBundle:Accueil:accueil }
+    path:    /accueil/{value}
+    defaults: { _controller: NKPersoPageBundle:Accueil:accueil, value: 'professor' }
 
 nk_perso_page_enseignements:
-    path:    /enseignements
-    defaults: { _controller: NKPersoPageBundle:Enseignements_Activites_Administratives\Enseignements:enseignements }
+    path:    /enseignements/{value}
+    defaults: { _controller: NKPersoPageBundle:Enseignements_Activites_Administratives\Enseignements:enseignements, value: 'professor' }
 
 nk_perso_page_recherche:
-    path:    /recherche
-    defaults: { _controller: NKPersoPageBundle:Recherche_Publications\Recherche:recherche }
+    path:    /recherche/{value}
+    defaults: { _controller: NKPersoPageBundle:Recherche_Publications\Recherche:recherche, value: 'professor' }
 
 nk_perso_page_publication:
-    path:    /publication
-    defaults: { _controller: NKPersoPageBundle:Recherche_Publications\Publication:publication }
+    path:    /publication/{value}
+    defaults: { _controller: NKPersoPageBundle:Recherche_Publications\Publication:publication, value: 'professor' }
 
 nk_perso_page_activites_administratives:
-    path:    /ActivitesAdministratives
-    defaults: { _controller: NKPersoPageBundle:Enseignements_Activites_Administratives\ActivitesAdministratives:activitesAdministratives }
+    path:    /ActivitesAdministratives/{value}
+    defaults: { _controller: NKPersoPageBundle:Enseignements_Activites_Administratives\ActivitesAdministratives:activitesAdministratives, value: 'professor' }
 
 nk_perso_page_lien:
-    path:    /lien
-    defaults: { _controller: NKPersoPageBundle:Liens_Hobbies\Lien:lien }
+    path:    /lien/{value}
+    defaults: { _controller: NKPersoPageBundle:Liens_Hobbies\Lien:lien, value: 'professor' }
 
 nk_perso_page_hobbie:
-    path:    /hobbie
-    defaults: { _controller: NKPersoPageBundle:Liens_Hobbies\Hobbie:hobbie }
+    path:    /hobbie/{value}
+    defaults: { _controller: NKPersoPageBundle:Liens_Hobbies\Hobbie:hobbie, value: 'professor' }
 
 nk_perso_page_ajax:
     path:    /ajax/{field}
