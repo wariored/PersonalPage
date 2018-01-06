@@ -13,10 +13,21 @@
 				<img src="http://ept.sn/wp-content/uploads/2017/05/LOGO.png" class="custom-logo" alt="logo de l'EPT" itemprop="logo" srcset="http://ept.sn/wp-content/uploads/2017/05/LOGO.png 450w, http://ept.sn/wp-content/uploads/2017/05/LOGO-300x65.png 300w" sizes="(max-width: 450px) 100vw, 450px" width="450" height="98">
 			</a>
 		</div>
-		{% block professorInformations %}
-			
-		{% endblock professorInformations %}
+		<input type="search" id="search">
 		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+            {% block professorInformations %}
+				<div id="professor-informations" class="col-xs-3">
+					<div class="card" style="height: 175px; width: 150px">
+						<img src="{{ asset('img_avatar.png') }}" alt="Avatar" style="width:100%; height: 100px">
+						<div class="container">
+							<h4><b>John Doe</b></h4>
+							<p>Architect & Engineer</p>
+						</div>
+					</div>
+				</div>
+            {% endblock professorInformations %}
+
 			<div id="button-container">
 				<a href="{{ path('fos_user_security_logout') }}" class="button" id="connexionBtn">
 					<span>Deconnexion ></span>
