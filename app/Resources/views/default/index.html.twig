@@ -1,44 +1,57 @@
 {% extends 'base.html.twig' %}
 {% block title %}Page enseigants{% endblock %}
 {% block body %}
-<div class="container" id="card-container">
-{% for i in range(0, 10) %}
-    <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">
+  <div class="container" id="card-container">
+    {% for professor in allProfessors %}
+        <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">
             <div class="card">
-                <img src="{{ asset('img_avatar.png') }}" alt="Avatar" style="width:100%">
+                <a {% if professor.user is not null %}
+                      href="{{ url('nk_perso_page_accueil', {'value': professor.user.username}) }}"
+                    {% else %}
+                      href="#"
+                    {% endif %} >
+                    <img {% if professor.sex.initial == 'M' %} src="{{ asset('img_avatar.png') }}"  
+                    {% else %} src="{{ asset('img_avatar2.png') }}" {% endif %} alt="Avatar" style="width:100%">
+                </a>
                 <div class="container">
-                    <h4><b>John Doe{{ i }}</b></h4>
-                    <p>Architect & Engineer</p>
+                    <h4><b>
+                    {% if professor.firstName|length > 15 %}
+                        {{professor.firstName|first}}
+                    {% else %}
+                        {{professor.firstName}}
+                    {% endif %}
+                    {{professor.LastName}}</b></h4>
+                    <p>{{professor.status}}</p>
+                    <p>{{professor.department.name}}</p>
                 </div>
             </div>
-    </div>
-        {% endfor %}
-</div>
+      </div>
+    {% endfor %}
+  </div>
 
-    {% block javascripts %}
-        <script>
-            $( document ).ready(function() {
-                $("#search").keyup(function () {
-                   console.log($("#search").val().toLowerCase());
-                   var cards = $("#card-container .card");
-                   for(var i=0; i< cards.length; i++){
-                       var texts = cards[i].textContent;
-                       console.log(texts);
-                           if (texts.toLowerCase().includes($("#search").val().toLowerCase())){
-                               cards[i].style.display = "block";
-                           }else{
-                               cards[i].style.display = "none"
-                           }
-                   }
-                })
-            });
-        </script>
-
-    {% endblock %}
+  {% block javascripts %}
+    <script>
+      $( document ).ready(function() {
+        $("#search").keyup(function () {
+          console.log($("#search").val().toLowerCase());
+          var cards = $("#card-container .card");
+          for(var i = 0; i< cards.length; i++){
+            var texts = cards[i].textContent;
+            console.log(texts);
+            if(texts.toLowerCase().includes($("#search").val().toLowerCase())){
+              cards[i].style.display = "block";
+            }else{
+              cards[i].style.display = "none"
+            }
+          }
+        })
+      });
+    </script>
+  {% endblock javascripts %}
 {% endblock %}
 
 {% block stylesheets %}
-<style>
+  <style>
 
-</style>
+  </style>
 {% endblock %}

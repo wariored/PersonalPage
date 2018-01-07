@@ -38,7 +38,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setProfessor(\NK\PersoPageBundle\Entity\User $professor = null)
+    public function setProfessor(\NK\PersoPageBundle\Entity\Professor $professor = null)
     {
         $this->professor = $professor;
 

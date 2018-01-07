@@ -17,9 +17,9 @@ class LienController extends Controller
     	$user = $this->getUser();
     	if ($user) 
     	{
-    		if($user->hasRole('ROLE_PROFESSOR'))
+    		if($user->hasRole('ROLE_PROFESSOR')  && $value == 'professor')
         	{
-		    	if ('POST' === $request->getMethod() && $value == 'professor')
+		    	if ('POST' === $request->getMethod())
 		        {
 		        	$em = $this->getDoctrine()
 		                    ->getManager();

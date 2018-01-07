@@ -72,7 +72,7 @@ class ActivitesAdministrativesController extends Controller
 		    {
 		    	$professorSearchedNotMe = $em->getRepository("AppBundle:User")
                                     		->findOneBy(array('username' => $value));
-                return $this->render('NKPersoPageBundle:PagesPersonnelles/ActivitesAdministratives:ActivitesAdministratives.html.twig',
+                return $this->render('NKPersoPageBundle:PagesPersonnelles/Enseignements_Activites_Administratives:ActivitesAdministratives.html.twig',
             		array('professorFoundNotMe' => $professorSearchedNotMe)
         		);
 		    }

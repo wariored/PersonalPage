@@ -58,6 +58,19 @@ class Professor
      */
     protected $publishedData;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="NK\PersoPageBundle\Entity\Sex", inversedBy="professor")
+     * @ORM\JoinColumn(name="sex_id")
+     */
+    protected $sex;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="NK\PersoPageBundle\Entity\Department", inversedBy="professor")
+     * @ORM\JoinColumn(name="department_id")
+     */
+    protected $department;
+
+
 
     /**
      * Get id
@@ -211,5 +224,53 @@ class Professor
     public function getPublishedData()
     {
         return $this->publishedData;
+    }
+
+    /**
+     * Set sex
+     *
+     * @param \NK\PersoPageBundle\Entity\Sex $sex
+     *
+     * @return Professor
+     */
+    public function setSex(\NK\PersoPageBundle\Entity\Sex $sex = null)
+    {
+        $this->sex = $sex;
+
+        return $this;
+    }
+
+    /**
+     * Get sex
+     *
+     * @return \NK\PersoPageBundle\Entity\Sex
+     */
+    public function getSex()
+    {
+        return $this->sex;
+    }
+
+    /**
+     * Set department
+     *
+     * @param \NK\PersoPageBundle\Entity\Department $department
+     *
+     * @return Professor
+     */
+    public function setDepartment(\NK\PersoPageBundle\Entity\Department $department = null)
+    {
+        $this->department = $department;
+
+        return $this;
+    }
+
+    /**
+     * Get department
+     *
+     * @return \NK\PersoPageBundle\Entity\Department
+     */
+    public function getDepartment()
+    {
+        return $this->department;
     }
 }

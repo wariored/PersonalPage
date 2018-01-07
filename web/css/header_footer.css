@@ -33,7 +33,7 @@ body{
     overflow-x: hidden;
 }
 
-#search{
+.search-zone{
     position: absolute;
     top: 60px;
     right: 40px;

@@ -13,7 +13,9 @@
 				<img src="http://ept.sn/wp-content/uploads/2017/05/LOGO.png" class="custom-logo" alt="logo de l'EPT" itemprop="logo" srcset="http://ept.sn/wp-content/uploads/2017/05/LOGO.png 450w, http://ept.sn/wp-content/uploads/2017/05/LOGO-300x65.png 300w" sizes="(max-width: 450px) 100vw, 450px" width="450" height="98">
 			</a>
 		</div>
-		<input type="search" id="search">
+		{% if app.request.get('_route') == 'homepage' %}
+			<div class="search-zone">Recherche : <input type="search" id="search"></div>
+		{% endif %}
 		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
             {% block professorInformations %}
