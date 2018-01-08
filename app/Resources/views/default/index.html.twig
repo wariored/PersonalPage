@@ -3,7 +3,7 @@
 {% block body %}
   <div class="container" id="card-container">
     {% for professor in allProfessors %}
-        <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3">
+        <div class="col-xs-6 col-sm-5 col-md-4 col-lg-3 card-container2">
             <div class="card">
                 <a {% if professor.user is not null %}
                       href="{{ url('nk_perso_page_accueil', {'value': professor.user.username}) }}"
@@ -30,23 +30,27 @@
   </div>
 
   {% block javascripts %}
-    <script>
-      $( document ).ready(function() {
-        $("#search").keyup(function () {
-          console.log($("#search").val().toLowerCase());
-          var cards = $("#card-container .card");
-          for(var i = 0; i< cards.length; i++){
-            var texts = cards[i].textContent;
-            console.log(texts);
-            if(texts.toLowerCase().includes($("#search").val().toLowerCase())){
-              cards[i].style.display = "block";
-            }else{
-              cards[i].style.display = "none"
-            }
-          }
-        })
-      });
-    </script>
+      <script>
+          $( document ).ready(function() {
+              var cards = $("#card-container .card-container2");
+              $("#search").keyup(function () {
+                  console.log($("#search").val().toLowerCase());
+                  document.getElementById("card-container").innerHTML = "";
+                  for(var i = 0; i< cards.length; i++){
+                      var card = cards[i];
+                      var texts = cards[i].textContent;
+                      if(texts.toLowerCase().includes($("#search").val().toLowerCase())){
+
+                          document.getElementById("card-container").appendChild(card);
+                      }
+                  }
+                  var foundedCards= $("#card-container .card-container2");
+                  if (foundedCards.length <1){
+                      document.getElementById("card-container").innerHTML = "<h3>Aucun résultat correspondant!</h3>";
+                  }
+              })
+          });
+      </script>
   {% endblock javascripts %}
 {% endblock %}
 
