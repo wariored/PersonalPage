@@ -13,23 +13,57 @@
 				<img src="http://ept.sn/wp-content/uploads/2017/05/LOGO.png" class="custom-logo" alt="logo de l'EPT" itemprop="logo" srcset="http://ept.sn/wp-content/uploads/2017/05/LOGO.png 450w, http://ept.sn/wp-content/uploads/2017/05/LOGO-300x65.png 300w" sizes="(max-width: 450px) 100vw, 450px" width="450" height="98">
 			</a>
 		</div>
+		{% if app.request.get('_route') in ['nk_perso_page_accueil','nk_perso_page_recherche', 'nk_perso_page_enseignements', 'nk_perso_page_lien', 'nk_perso_page_publication', 'nk_perso_page_activites_administratives', 'nk_perso_page_hobbie'] %}
+			{% if is_granted('ROLE_PROFESSOR') %}
+				{% if professorFoundNotMe is not defined %}
+				    <div id="professor-informations" class="col-xs-offset-2 col-xs-3 col-sm-3 col-md-1">
+						<div class="card" style="height: 175px; width: 150px;box-shadow: none">
+							<img src="{{ asset('img_avatar.png') }}" alt="Avatar" style="width:100%; height: 100px">
+							<div class="container">
+								<h4><b>{{app.user.professor.firstName}} {{app.user.professor.lastName}}</b></h4>
+									{{app.user.professor.status}}<br>
+									{{app.user.professor.department.name}}
+							</div>
+						</div>
+					</div>
+				{% elseif professorFoundNotMe is not null %}
+					<div id="professor-informations" class="col-xs-offset-2 col-xs-3 col-sm-3 col-md-1">
+						<div class="card" style="height: 175px; width: 150px;box-shadow: none">
+							<img src="{{ asset('img_avatar.png') }}" alt="Avatar" style="width:100%; height: 100px">
+							<div class="container">
+								<h4><b>{{professorFoundNotMe.professor.firstName}} {{professorFoundNotMe.professor.lastName}}</b></h4>
+									{{professorFoundNotMe.professor.status}}<br>
+									{{professorFoundNotMe.professor.department.name}}
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			{% else %}
+				{% if professorFound is defined and professorFound is not null %}
+					<div id="professor-informations" class="col-xs-offset-2 col-xs-3 col-sm-3 col-md-1">
+						<div class="card" style="height: 175px; width: 150px;box-shadow: none">
+							<img src="{{ asset('img_avatar.png') }}" alt="Avatar" style="width:100%; height: 100px">
+							<div class="container">
+								<h4><b>{{professorFound.professor.firstName}} {{professorFound.professor.lastName}}</b></h4>
+									{{professorFound.professor.status}}<br>
+									{{professorFound.professor.department.name}}
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			{% endif %}
+				
+            {% endif %}
+        {% if app.request.get('_route') != 'homepage' %}
+			<a style="float: right;" href="{{ path('homepage') }}">accueil</a>
+		{% endif %}
 		{% if app.request.get('_route') == 'homepage' %}
 			<div class="search-zone col-xs-3">Recherche : <input type="search" id="search"></div>
 		{% endif %}
 		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-
-            {% block professorInformations %}
-				<div id="professor-informations" class="col-xs-offset-2 col-xs-3 col-sm-3 col-md-1">
-					<div class="card" style="height: 175px; width: 150px;box-shadow: none">
-						<img src="{{ asset('img_avatar.png') }}" alt="Avatar" style="width:100%; height: 100px">
-						<div class="container">
-							<h4><b>John Doe</b></h4>
-							<p>Architect & Engineer</p>
-						</div>
-					</div>
-				</div>
-            {% endblock professorInformations %}
-
+			{% if app.request.get('_route') in ['nk_perso_page_accueil','nk_perso_page_recherche', 'nk_perso_page_enseignements', 'nk_perso_page_lien', 'nk_perso_page_publication', 'nk_perso_page_activites_administratives', 'nk_perso_page_hobbie'] %}
+				<br><p style="float: right;">changer <a href="{{ path('fos_user_change_password') }}">mot de passe</a>
+			{% endif %}
 			<div id="button-container">
 				<a href="{{ path('fos_user_security_logout') }}" class="button" id="connexionBtn">
 					<span>Deconnexion ></span>

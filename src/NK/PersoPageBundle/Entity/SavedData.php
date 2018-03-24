@@ -63,6 +63,20 @@ class SavedData
      */
     private $hobbie;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="bref", type="text", nullable=true)
+     */
+    private $bref;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="biographie", type="text", nullable=true)
+     */
+    private $biographie;
+
 
     /**
      * @var \DateTime
@@ -282,5 +296,53 @@ class SavedData
     public function getProfessor()
     {
         return $this->professor;
+    }
+
+    /**
+     * Set bref
+     *
+     * @param string $bref
+     *
+     * @return SavedData
+     */
+    public function setBref($bref)
+    {
+        $this->bref = $bref;
+
+        return $this;
+    }
+
+    /**
+     * Get bref
+     *
+     * @return string
+     */
+    public function getBref()
+    {
+        return $this->bref;
+    }
+
+    /**
+     * Set biographie
+     *
+     * @param string $biographie
+     *
+     * @return SavedData
+     */
+    public function setBiographie($biographie)
+    {
+        $this->biographie = $biographie;
+
+        return $this;
+    }
+
+    /**
+     * Get biographie
+     *
+     * @return string
+     */
+    public function getBiographie()
+    {
+        return $this->biographie;
     }
 }

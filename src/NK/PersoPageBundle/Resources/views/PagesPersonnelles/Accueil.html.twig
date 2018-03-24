@@ -2,25 +2,284 @@
 {% block titre %}Accueil{% endblock titre %}
 {% block NKPersoPageBundle_content %}
     <!--  La duplication de code dans un projet, c’est le mal incarné -->
-    <h2>En bref</h2>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf
-    <h2>Coordonnées</h2>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf
-    <h2>Biographie</h2>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
-    sjhgfghhfdsghfdsghsfghjshhfgkhdsgjgjdsgkjhf<br>
+    {% if is_granted('ROLE_PROFESSOR') %}
+        {% if professorFoundNotMe is not defined %}
+            {% for noticeMessage in app.session.flashbag.get('notice') %}
+                <div class="alert alert-success" style="margin-top: 15px";>
+                    {{ noticeMessage }}
+                </div>
+            {% endfor %}
+            <div>    
+                <h2>En bref</h2>
+                <div id="en-bref">
+                    {% if app.user.professor.publishedData.bref is defined %}
+                        {{ app.user.professor.publishedData.bref|raw }}
+                    {% endif %}
+                </div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" style="float: right;" data-target="#bref">modifier</button>
+            </div>
+            <div>    
+                <h2>Coordonnées</h2>
+                <div class="row" id="coordonnees">
+                    <div class="col-sm-7">
+                        <table class="table">
+                              <tbody><br>
+                                <tr>
+                                  <th scope="row">Web</th>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">Email</th>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">Phone / Tel.</th>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">Room / Bureau</th>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">Adresse Postale</th>
+                                  <td></td>
+                                </tr>
+                              </tbody>
+                        </table>
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="float: right;" id="btn-coordonnees">modifier</button>
+            </div>
+            <div>
+                <h2>Biographie</h2>
+                <div id="biographie">
+                    {% if app.user.professor.publishedData.biographie is defined %}
+                        {{ app.user.professor.publishedData.biographie|raw }}
+                    {% endif %}
+                </div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" style="float: right;" data-target="#biogra">modifier</button>
+            </div>
+
+
+            <div class="modal fade" id="bref" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <form method="post" action="{{ url('nk_perso_page_accueil') }}">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modification En Bref</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">    
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Message:</label>
+                                    <textarea class="form-control" id="brefText" name="bref"></textarea>
+                                </div>
+                                    
+                            </div>
+                            <div class="modal-footer">
+                                <button style="float:left;" class="btn btn-default"  id="save1">Sauvegarder</button>
+                                <h5 style="float:left;" id="zone1"></h5>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                <button  type="submit" class="btn btn-success">Modifier</button>
+                                <div>Recharger la <a id="get-saved1" >sauvegarde</a></div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="modal fade" id="biogra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <form method="post" action="{{ url('nk_perso_page_accueil') }}">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modification Biographie</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Message:</label>
+                                    <textarea class="form-control" id="biographieText" name="biographie"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button style="float:left;" class="btn btn-default"  id="save2">Sauvegarder</button>
+                                <h5 style="float:left;" id="zone2"></h5>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                <button type="submit" class="btn btn-success">Modifier</button>
+                                <div>Recharger la <a id="get-saved2" >sauvegarde</a></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% elseif professorFoundNotMe is not null %}
+            {% if professorFoundNotMe.professor.publishedData is not null %}
+                <div>    
+                    <h2>En bref</h2>
+                    <div id="en-bref">
+                        {% if professorFoundNotMe.publishedData.bref is defined %}
+                            {{ professorFoundNotMe.publishedData.bref|raw }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div>    
+                    <h2>Coordonnées</h2>
+                    <div class="row" id="coordonnees">
+                        <div class="col-sm-7">
+                            <table class="table">
+                                  <tbody><br>
+                                    <tr>
+                                      <th scope="row">Web</th>
+                                      <td></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Email</th>
+                                      <td></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Phone / Tel.</th>
+                                      <td></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Room / Bureau</th>
+                                      <td></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Adresse Postale</th>
+                                      <td></td>
+                                    </tr>
+                                  </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2>Biographie</h2>
+                    <div id="biographie">
+                        {% if professorFoundNotMe.publishedData.biographie is defined %}
+                            {{ professorFoundNotMe.publishedData.biographie|raw }}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+        {% else %}
+        {% if professorFound is defined and professorFound is not null %}
+            {% if professorFound.professor.publishedData is not null %}
+                <div>    
+                    <h2>En bref</h2>
+                    <div id="en-bref">
+                        {% if professorFound.publishedData.bref is defined %}
+                            {{ professorFoundNotMe.publishedData.bref|raw }}
+                        {% endif %}
+                    </div>
+                </div>
+                <div>    
+                    <h2>Coordonnées</h2>
+                    <div class="row" id="coordonnees">
+                        <div class="col-sm-7">
+                            <table class="table">
+                                <tbody>
+                                    <br>
+                                    <tr>
+                                      <th scope="row">Web</th>
+                                      <td></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Email</th>
+                                      <td></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Phone / Tel.</th>
+                                      <td></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Room / Bureau</th>
+                                      <td></td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">Adresse Postale</th>
+                                      <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2>Biographie</h2>
+                    <div id="biographie">
+                        {% if professorFound.publishedData.biographie is defined %}
+                            {{ professorFound.publishedData.biographie|raw }}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+
+    
+
 {% endblock NKPersoPageBundle_content %}
+{% block javascripts %}
+    <script type="text/javascript">
+        {% if is_granted('ROLE_PROFESSOR') %}
+            CKEDITOR.replace( 'brefText' );
+            CKEDITOR.replace( 'biographieText' );
+            $("#save1").on("click", function() {
+                var datas = {request : CKEDITOR.instances.brefText.getData(), query: 'bref'};
+                $.ajax({
+                    type: "POST",
+                    beforeSend: function() { $("#zone1").html('En charge.....') },
+                    url: "{{ url('nk_perso_page_accueil') }}",
+                    data: datas,
+                    error: function(jqXHR, textStatus, errorThrown) { $('#zone1').html('Une erreur est survenue') },
+                    success: function(htmlResponse) { $('#zone1').html('Données bien enrégistrées') }
+                });  
+            });
+            $("#save2").on("click", function() {
+                var datas = {request : CKEDITOR.instances.biographieText.getData(), query: 'biographie'};
+                $.ajax({
+                    type: "POST",
+                    beforeSend: function() { $("#zone2").html('En charge.....') },
+                    url: "{{ url('nk_perso_page_accueil') }}",
+                    data: datas,
+                    error: function(jqXHR, textStatus, errorThrown) { $('#zone2').html('Une erreur est survenue') },
+                    success: function(htmlResponse) { $('#zone2').html('Données bien enrégistrées') }
+                });  
+            });
+            $("#get-saved1").on("click", function() {
+                $.ajax({
+                    type: 'post',
+                    url: "{{ url('nk_perso_page_ajax', {'field': 'bref'}) }}",
+                    dataType: 'json',
+                    beforeSend: function () {  $('#zone1').html('En charge.....') },
+                    error: function(jqXHR, textStatus, errorThrown) { $('#zone1').html('Une erreur est survenue') },
+                    success: function (json) {
+                            $('#zone1').html('Données chargées');
+                            CKEDITOR.instances.brefText.setData(json);
+                    }
+                });
+            });
+            $("#get-saved2").on("click", function() {
+                $.ajax({
+                    type: 'post',
+                    url: "{{ url('nk_perso_page_ajax', {'field': 'biographie'}) }}",
+                    dataType: 'json',
+                    beforeSend: function () {  $('#zone2').html('En charge.....') },
+                    error: function(jqXHR, textStatus, errorThrown) { $('#zone2').html('Une erreur est survenue') },
+                    success: function (json) {
+                            $('#zone2').html('Données chargées');
+                            CKEDITOR.instances.biographieText.setData(json);
+                    }
+                });
+            });
+        {% endif %}
+    </script>
+{% endblock javascripts %}

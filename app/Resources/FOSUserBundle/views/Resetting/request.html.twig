@@ -1,5 +1,9 @@
 {% extends "@FOSUser/layout.html.twig" %}
 
 {% block fos_user_content %}
-{% include "@FOSUser/Resetting/request_content.html.twig" %}
+	{% if app.user %}
+		<div class="container row" style="float: center; margin-top: 100px; margin-bottom:260px;">Vous vous êtes déja connecté</div>
+	{% else %}
+		{% include "@FOSUser/Resetting/request_content.html.twig" %}
+	{% endif %}
 {% endblock fos_user_content %}

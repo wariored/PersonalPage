@@ -5,8 +5,8 @@ parameters:
     database_name: perso_page
     database_user: root
     database_password: root
-    mailer_transport: smtp
-    mailer_host: localhost
-    mailer_user: null
-    mailer_password: null
+    mailer_transport: gmail
+    mailer_host: null
+    mailer_user: gnotes987@gmail.com
+    mailer_password: ab cd @.1
     secret: 5951acbb8dc5581705007fc67855021fed6e3d7e

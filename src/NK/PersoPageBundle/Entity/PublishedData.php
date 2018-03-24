@@ -65,6 +65,20 @@ class PublishedData
     private $hobbie;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="bref", type="text", nullable=true)
+     */
+    private $bref;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="biographie", type="text", nullable=true)
+     */
+    private $biographie;
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="added_date", type="datetime")
      */
@@ -282,5 +296,53 @@ class PublishedData
     public function getProfessor()
     {
         return $this->professor;
+    }
+
+    /**
+     * Set bref
+     *
+     * @param string $bref
+     *
+     * @return PublishedData
+     */
+    public function setBref($bref)
+    {
+        $this->bref = $bref;
+
+        return $this;
+    }
+
+    /**
+     * Get bref
+     *
+     * @return string
+     */
+    public function getBref()
+    {
+        return $this->bref;
+    }
+
+    /**
+     * Set biographie
+     *
+     * @param string $biographie
+     *
+     * @return PublishedData
+     */
+    public function setBiographie($biographie)
+    {
+        $this->biographie = $biographie;
+
+        return $this;
+    }
+
+    /**
+     * Get biographie
+     *
+     * @return string
+     */
+    public function getBiographie()
+    {
+        return $this->biographie;
     }
 }

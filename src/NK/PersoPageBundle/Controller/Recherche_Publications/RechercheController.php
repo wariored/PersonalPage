@@ -36,7 +36,7 @@ class RechercheController extends Controller
 			            else
 			            {
 			            	$savedData = new SavedData();
-			            	$savedData->setrecherche($recherche);
+			            	$savedData->setRecherche($recherche);
 			            	$savedData->setProfessor($professor);
 			            	$em->persist($savedData);
 			            }
@@ -49,7 +49,7 @@ class RechercheController extends Controller
 			            if ($professor->getPublishedData()) 
 			            {
 			            	$publishedData = $professor->getPublishedData();
-			            	$publishedData->setrecherche($recherche);
+			            	$publishedData->setRecherche($recherche);
 			            	$em->persist($publishedData);
 			            }
 			            else

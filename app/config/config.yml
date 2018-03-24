@@ -74,8 +74,15 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\User
     from_email:
-        address: kcheikhtidjane@ept.sn
-        sender_name: Konteye
+        address: gnotes987@gmail.com
+        sender_name: EPT PAGE PERSONNELLE
+    resetting:
+        email:
+            from_email:
+                address: gnotes987@gmail.com
+                sender_name: EPT PAGE PERSONNELLE
     registration:
         form:
             type: AppBundle\Form\RegistrationType
+    service:
+        mailer: fos_user.mailer.twig_swift
